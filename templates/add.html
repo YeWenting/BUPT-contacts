@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Add - BUPT contact </title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.6 -->
+  <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="/static/css/AdminLTE.min.css">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="/static/plugins/iCheck/square/blue.css">
+  <!--Local css-->
+  <link rel="stylesheet" href="/static/css/add.css">
+  <!--jQuery-->
+  <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
+  <!--validate plugin-->
+  <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+  <!-- My verify js -->
+  <script src="/static/js/add-verify.js"></script>
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and static queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="/static/js/html5shiv.min.js"></script>
+  <script src="/static/js/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body class="hold-transition register-page">
+<div class="alert alert-danger alert-dismissible" style="position: absolute; display: none; width: 100%; margin-top:-101px">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+  <h4><i class="icon fa fa-ban"></i> Invalid information!</h4>
+  <p id="error-tab"></p>
+</div>
+<div class="register-box">
+  <div class="register-logo" >
+    <a href="./index.html"><b>BUPT </b>contact</a>
+  </div>
+
+  <div class="register-box-body">
+    <p class="login-box-msg">Add a new friend.</p>
+
+    <form method="post" id="form">
+        {% csrf_token %}
+      <div class="form-group has-feedback">
+        <input name="name" type="text" class="form-control" placeholder="Full name" required>
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input name="telephone" class="form-control" placeholder="Telephone" required minlength=10" maxlength="13">
+        <span class=" glyphicon glyphicon-earphone form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input name="mobilephone"  class="form-control" placeholder="Mobile phone" digit required minlength=11" maxlength="11" >
+        <span class="glyphicon glyphicon-phone form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input id="location" type="text" class="form-control" placeholder="Location" required >
+        <span class="glyphicon glyphicon-home form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input name="OICQ" type="text" class="form-control" placeholder="OICQ" required digit >
+        <span class="glyphicon glyphicon-tree-deciduous form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input name="email" type="email" class="form-control" placeholder="Email" required email >
+        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+      </div>
+      <div class="form-group">
+        <div class="radio">
+          <label>
+            <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" >
+            Male
+          </label>
+          <label>
+            <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+            Female
+          </label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-4 ">
+          <button id="submit-button" type="submit" class="btn btn-primary btn-block btn-flat right-side" >Add</button>
+        </div>
+        <!-- /.col -->
+      </div>
+    </form>
+  </div>
+  <!-- /.form-box -->
+</div>
+<!-- /.register-box -->
+<!-- Bootstrap 3.3.6 -->
+<script src="/static/js/bootstrap.min.js"></script>
+<!-- iCheck -->
+<script src="/static/plugins/iCheck/icheck.min.js"></script>
+<script>
+  $(function () {
+    $('input').iCheck({
+      checkboxClass: 'icheckbox_square-blue',
+      radioClass: 'iradio_square-blue',
+      increaseArea: '20%' // optional
+    });
+  });
+</script>
+</body>
+</html>
