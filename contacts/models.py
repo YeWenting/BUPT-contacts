@@ -11,4 +11,4 @@ class Person(models.Model):
     email = models.CharField(max_length=30)
     address = models.CharField(max_length=40)
     QQ = models.CharField(max_length=12)
-    gender = models.BooleanField
+    gender = models.CharField(max_length=6)

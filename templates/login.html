@@ -42,7 +42,6 @@
         <p class="login-box-msg">Please sign in first</p>
 
         <form method="post" action="/login/">
-            {% csrf_token %}
             <div class="form-group has-feedback">
                 <input name="username" type="text" class="form-control" placeholder="Account" required>
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>

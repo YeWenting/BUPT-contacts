@@ -7,7 +7,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Main pannl - Bupt contact</title>
+    <title>Main pannl - Bupt contacts</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
@@ -108,7 +108,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <!-- The user image in the menu -->
                             <li class="user-header">
                                 <img src="/static/img/user2-160x160.png" class="img-circle" alt="User Image">
-
                                 <p>
                                     Ye Wenting
                                     <small>Member since Nov. 2012</small>
@@ -166,7 +165,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- search form (Optional) -->
             <form action="#" method="get" class="sidebar-form">
                 <div class="input-group">
-                    <input type="text" name="q" class="form-control" placeholder="Search...">
+                    <input type="text" name="search-name" class="form-control" placeholder="Search person...">
                     <span class="input-group-btn">
                 <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
                 </button>
@@ -273,7 +272,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs pull-right">
                         <li class="header pull-left" ><i class="fa fa-th" ></i><span id="all-friend">全部联系人</span></li>
-                        <li class="header pull-left"><a href="./add.html" style="padding-top: 3px"><i
+                        <li class="header pull-left"><a href="/add/" style="padding-top: 3px"><i
                                 class="fa fa-fw fa-user-plus"></i></a></li>
                         <!--<li class="header pull-left"><a style="padding-top: 5px" title="按下后即可直接修改，再次按下保存"><i-->
                                 <!--class="fa fa-fw fa-edit" onclick="changeEditable()"></i></a></li>-->
@@ -282,74 +281,30 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <div class="box tab-pane active" id="tab_1-1">
                             <div class="box-body">
                                 <ul class="products-list product-list-in-box">
+                                    {% for person in personlist %}
                                     <li class="item">
                                         <div class="product-img">
-                                            <img src="/static/img/user1.png" alt="Product Image" class="img-circle">
+                                            <img src="/static/img/{{ person.gender }}.jpg" alt="Product Image" class="img-circle">
                                             <br>
-                                            <h4 style="text-align: center" class="contacts-list-name" >Ye Wenting </h4>
+                                            <h4 style="text-align: center" class="contacts-list-name" >{{ person.name }}</h4>
                                         </div>
                                         <div class="product-info" >
                                             <div class="callout callout-warning pull-right" style="display: none">
                                                 <h4>Invalid information</h4>
                                                 <p class="error-tab"></p>
                                             </div>
-                                            <span class="product-title contact-message name"> Ye Wenting </span>
+                                            <span class="product-title contact-message name">{{ person.name }}</span>
                                             <span class="fa fa-fw fa-edit edit-button" ></span>
                                             <span class="fa fa-fw fa-close delete-button"></span>
-                                            <p><em>Tel: </em><span class="contact-message telephone" >0591-83796279</span></p>
-                                            <p><em>Mob: </em><span class="contact-message mobilephone" >13241260146</span></p>
-                                            <p><em>Loc: </em><span class="contact-message location" >Xitucheng Road 10th, Beijing, China</span></p>
-                                            <p><em>QQ: </em><span class="contact-message OICQ">471731724</span></p>
-                                            <p><em>Email：</em><span class="contact-message email" >Wenting_Ye@outlook.com</span></p>
+                                            <p><em>Gender: </em><span class="contact-message gender" >{{ person.gender }}</span></p>
+                                            <p><em>Tel: </em><span class="contact-message telephone" >{{ person.telephone }}</span></p>
+                                            <p><em>Mob: </em><span class="contact-message mobilephone" >{{ person.mobile }}</span></p>
+                                            <p><em>Loc: </em><span class="contact-message location" >{{ person.address }}</span></p>
+                                            <p><em>QQ: </em><span class="contact-message OICQ">{{ person.QQ }}</span></p>
+                                            <p><em>Email：</em><span class="contact-message email" >{{ person.email }}</span></p>
                                         </div>
                                     </li>
-                                    <!-- /.item -->
-                                    <li class="item">
-                                        <div class="product-img">
-                                            <img src="/static/img/user2-160x160.png" alt="Product Image" class="img-circle">
-                                            <br>
-                                            <h4 style="text-align: center" class="contacts-list-name" >Sun Xiaoyu </h4>
-                                        </div>
-                                        <div class="product-info">
-                                            <div class="callout callout-warning pull-right" style="display: none">
-                                                <h4>Invalid information</h4>
-                                                <br>
-                                                <p class="error-tab"></p>
-                                            </div>
-                                            <span class="product-title contact-message name"> Sun Xiaoyu </span>
-                                            <span class="fa fa-fw fa-edit edit-button" ></span>
-                                            <span class="fa fa-fw fa-close delete-button"></span>
-                                            <p><em>Tel: </em><span class="contact-message" >0591-83796279</span></p>
-                                            <p><em>Mob: </em><span class="contact-message" >13241260146</span></p>
-                                            <p><em>Loc: </em><span class="contact-message" >Beijing, China</span></p>
-                                            <p><em>QQ: </em><span class="contact-message" >471731724</span></p>
-                                            <p><em>Email：</em><span class="contact-message" >xxxxxxx@outlook.com</span>
-                                            </p>
-                                        </div>
-                                    </li>
-                                    <li class="item">
-                                        <div class="product-img">
-                                            <img src="/static/img/user2.png" alt="Product Image" class="img-circle">
-                                            <br>
-                                            <h4 style="text-align: center" class="contacts-list-name" >Huang Haoshuo </h4>
-                                        </div>
-                                        <div class="product-info">
-                                            <div class="callout callout-warning pull-right" style="display: none">
-                                                <h4>Invalid information</h4>
-                                                <br>
-                                                <p class="error-tab"></p>
-                                            </div>
-                                            <span class="product-title contact-message name">Huang Haoshuo </span>
-                                            <span class="fa fa-fw fa-edit edit-button" ></span>
-                                            <span class="fa fa-fw fa-close delete-button"></span>
-                                            <p><em>Tel: </em><span class="contact-message" >010-12345678</span></p>
-                                            <p><em>Mob: </em><span class="contact-message" >13232323232</span></p>
-                                            <p><em>Loc: </em><span class="contact-message" >Tsinghua University, Beijing, China</span></p>
-                                            <p><em>QQ: </em><span class="contact-message" >471731724</span></p>
-                                            <p><em>Email：</em><span class="contact-message">xxxxxxx@outlook.com</span>
-                                            </p>
-                                        </div>
-                                    </li>
+                                    {% endfor %}
                                 </ul>
                             </div>
 

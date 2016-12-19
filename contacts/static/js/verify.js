@@ -8,6 +8,7 @@
  */
 
 $(".delete-button").on("click", function () {
+    this_name = $(this).closest("div").find(".name").text();
     $.confirm({
         title: 'Confirm Deletion',
         content: "Do you REALLY want to delete?",
@@ -20,11 +21,45 @@ $(".delete-button").on("click", function () {
                 text: 'Yes',
                 btnClass: 'btn-info',
                 action: function () {
-                    $.alert('Delete successfully.');
+                    console.log(name);
+                    $.post("/delete/", {name: this_name},
+                        function(data, status){
+                            if (data.message == 'success')
+                                $.alert({
+                                    title: 'SUCCESS',
+                                    content: 'The specific person has been deleted.',
+                                    icon: 'fa fa-fw fa-ban',
+                                    animation: 'zoom',
+                                    closeAnimation: 'zoom',
+                                    buttons: {
+                                        okay: {
+                                            text: 'Okay',
+                                            btnClass: 'btn-primary',
+                                            action: function() {
+                                                window.location.reload()
+                                            }
+                                        }
+                                    }
+                                });
+                            else
+                                $.alert({
+                                    title: 'error',
+                                    content: 'Operation failed',
+                                    icon: 'fa fa-fw fa-ban',
+                                    animation: 'zoom',
+                                    closeAnimation: 'zoom',
+                                    buttons: {
+                                        okay: {
+                                            text: 'Okay',
+                                            btnClass: 'btn-primary'
+                                        }
+                                    }
+                                });
+                    })
                 }
             },
             cancel: function () {
-            },
+            }
         }
     });
 });
@@ -67,10 +102,20 @@ $(document).ready(function () {
         $(this).closest("div").find(".contact-message").attr("contenteditable", "true");
         var button = $("<i></i>").attr("class", "fa fa-fw fa-check-square-o check-button");
         $(this).after(button);
-        alert("You can edit " + $(this).closest("div").find(".name").text() + "'s info now.");
+        $.alert("You can edit " + $(this).closest("div").find(".name").text() + "'s info now.");
         $(this).remove();
 
-        $(".check-button").click(function () {
+        $(".check-button").click(function ()
+        {
+            newName = $(this).closest("div").find(".name").text();
+            newGender = $(this).closest("div").find(".gender").text();
+            newTelephone = $(this).closest("div").find(".telephone").text();
+            newMobile = $(this).closest("div").find(".mobilephone").text();
+            newAddress = $(this).closest("div").find(".location").text();
+            newQQ = $(this).closest("div").find(".OICQ").text();
+            newEmail = $(this).closest("div").find(".email").text();
+            $.post('')
+
             $(this).closest("div").find(".contact-message").attr("contenteditable", "false");
             var button = $("<i></i>").attr("class", "fa fa-fw fa-edit edit-button");
             $(this).after(button);

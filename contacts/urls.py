@@ -12,4 +12,5 @@ urlpatterns = [
     url(r'^add/$', views.getAdd),
     url(r'^login/$', views.logIn),
     url(r'^logout/$', views.logOut),
+    url(r'^delete/$', views.delete),
 ]

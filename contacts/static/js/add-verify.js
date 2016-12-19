@@ -3,8 +3,8 @@
  */
 
 $.validator.setDefaults({
-    submitHandler: function() {
-        alert("Add successfully!");
+    submitHandler: function(form) {
+        form.submit();
     }
 });
 
