@@ -162,15 +162,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </div>
 
             <!-- search form (Optional) -->
-            <form action="find/" method="get" class="sidebar-form" target="_blank">
+            <div class="sidebar-form">
                 <div class="input-group">
                     <input type="text" name="search-name" class="form-control" placeholder="Search person...">
                     <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
+                        <button id="search-btn" class="btn btn-flat">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </span>
                 </div>
-            </form>
+            </div>
             <!-- /.search form -->
 
             <!-- Sidebar Menu -->
@@ -190,7 +191,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Basic information
+                Search Result
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
@@ -201,78 +202,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Main content -->
         <section class="content">
 
-            <!-- Your Page Content Here -->
-            <div class="row">
-                <div class="col-lg-3 col-xs-6">
-                    <!-- small box -->
-                    <div class="small-box bg-aqua">
-                        <div class="inner">
-                            <h3>{{ tot }}</h3>
-
-                            <p>联系人总数</p>
-                        </div>
-                        <div class="icon">
-                            <i class="fa fa-fw fa-user"></i>
-                        </div>
-                        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-                <!-- ./col -->
-                <div class="col-lg-3 col-xs-6">
-                    <!-- small box -->
-                    <div class="small-box bg-green">
-                        <div class="inner">
-                            <h3>0</h3>
-
-                            <p>短信总数(暂不开放)</p>
-                        </div>
-                        <div class="icon" style="height:70px">
-                            <i class="fa fa-fw fa-comment-o"></i>
-                        </div>
-                        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-                <!-- ./col -->
-                <div class="col-lg-3 col-xs-6">
-                    <!-- small box -->
-                    <div class="small-box bg-yellow">
-                        <div class="inner">
-                            <h3>{{ male }}</h3>
-
-                            <p>男性朋友总数</p>
-                        </div>
-                        <div class="icon">
-                            <i class="fa fa-fw fa-black-tie "></i>
-                        </div>
-                        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-                <!-- ./col -->
-                <div class="col-lg-3 col-xs-6">
-                    <!-- small box -->
-                    <div class="small-box bg-red">
-                        <div class="inner">
-                            <h3>{{ female }}</h3>
-
-                            <p>女性朋友总数</p>
-                        </div>
-                        <div class="icon">
-                            <i class="fa fa-fw fa-neuter"></i>
-                        </div>
-                        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-                <!-- ./col -->
-            </div>
-
             <div class="col-md-12" style="padding:0px; margin-top:2%">
 
                 <!-- Custom Tabs (Pulled to the right) -->
                 <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs pull-right">
-                        <li class="header pull-left"><i class="fa fa-th"></i><span id="all-friend">全部联系人</span></li>
-                        <li class="header pull-left"><a href="add/" style="padding-top: 3px"><i
-                                class="fa fa-fw fa-user-plus"></i></a></li>
+                        <li class="header pull-left"><i class="fa fa-th"></i><span id="all-friend">  查找结果</span></li>
                         <!--<li class="header pull-left"><a style="padding-top: 5px" title="按下后即可直接修改，再次按下保存"><i-->
                         <!--class="fa fa-fw fa-edit" onclick="changeEditable()"></i></a></li>-->
                     </ul>
@@ -295,8 +230,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                     <p class="error-tab"></p>
                                                 </div>
                                                 <span class="product-title contact-message name">{{ person.name }}</span>
-                                                <span class="fa fa-fw fa-edit edit-button"></span>
-                                                <span class="fa fa-fw fa-close delete-button"></span>
                                                 <p><em>Gender: </em><span
                                                         class="contact-message gender">{{ person.gender }}</span></p>
                                                 <p><em>Tel: </em><span
@@ -350,9 +283,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </div>
 
 <script src="/static/plugins/jQuery/jquery-2.2.3.min.js"></script>
-<script src="/static/js/jquery-confirm.min.js">
-</script>
-<script src="/static/js/verify.js"></script>
 <!-- REQUIRED JS SCRIPTS -->
 
 <!-- Bootstrap 3.3.6 -->

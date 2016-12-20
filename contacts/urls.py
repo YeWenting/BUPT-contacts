@@ -9,8 +9,11 @@ urlpatterns = [
     url(r'^home/$', views.getIndex, name="home"),
     url(r'^contacts/$', views.getContacts, name="contacts"),
     url(r'^cv/$', views.getCV),
-    url(r'^add/$', views.getAdd),
+    url(r'^contacts/add/$', views.getAdd),
     url(r'^login/$', views.logIn),
     url(r'^logout/$', views.logOut),
-    url(r'^delete/$', views.delete),
+    url(r'^contacts/delete/$', views.delete),
+    url(r'^contacts/edit/$', views.edit),
+    url(r'^contacts/find/$', views.find)
+
 ]

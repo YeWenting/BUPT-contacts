@@ -13,7 +13,11 @@ def getIndex(request):
 @login_required
 def getContacts(request):
     personlist = Person.objects.all()
-    return render(request, 'contact.html', {'personlist':personlist})
+    num_of_males = Person.objects.filter(gender='male').__len__()
+    num_of_females = Person.objects.filter(gender='female').__len__()
+    num_of_contacts = num_of_females + num_of_males
+    return render(request, 'contact.html', {'personlist': personlist, 'female': num_of_females, 'male': num_of_males,
+                                            'tot':num_of_contacts})
 
 def switchIndex(request):
     return HttpResponseRedirect("home/")
@@ -67,7 +71,6 @@ def logOut(request):
 
 def delete(request):
     this_name = request.POST['name']
-    people = Person.objects.all()
     p = Person.objects.filter(name=this_name)
     result = {}
     if p.__len__() > 0:
@@ -76,3 +79,39 @@ def delete(request):
     else:
         result['message'] = 'fail'
     return JsonResponse(result)
+
+
+def edit(request):
+    old_name = request.POST['old_name']
+    new_name = request.POST['new_name']
+    new_gender = request.POST['new_gender']
+    new_telephone = request.POST['new_telephone']
+    new_mobile = request.POST['new_mobile']
+    new_address = request.POST['new_address']
+    new_qq = request.POST['new_qq']
+    new_email = request.POST['new_email']
+
+    result = {}
+    p = Person.objects.get(name=old_name)
+    if p:
+        p.name = new_name
+        p.gender = new_gender
+        p.telephone = new_telephone
+        p.mobile = new_mobile
+        p.address = new_address
+        p.QQ = new_qq
+        p.email = new_email
+        p.save()
+        result['message'] = 'success'
+    else:
+        result['message'] = 'fail'
+
+    return JsonResponse(result)
+
+
+def find(request):
+    name = request.GET['search-name']
+
+    p = Person.objects.filter(name=name)
+
+    return render(request, 'find.html', {'personlist':p})

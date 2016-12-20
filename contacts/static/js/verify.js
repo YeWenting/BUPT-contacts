@@ -7,106 +7,112 @@
  *      链接数据库后，对于非法操作要复原其原来数据。
  */
 
-$(".delete-button").on("click", function () {
-    this_name = $(this).closest("div").find(".name").text();
-    $.confirm({
-        title: 'Confirm Deletion',
-        content: "Do you REALLY want to delete?",
-        icon: 'fa fa-question-circle',
-        animation: 'scale',
-        closeAnimation: 'scale',
-        opacity: 0.5,
-        buttons: {
-            'confirm': {
-                text: 'Yes',
-                btnClass: 'btn-info',
-                action: function () {
-                    console.log(name);
-                    $.post("/delete/", {name: this_name},
-                        function(data, status){
-                            if (data.message == 'success')
-                                $.alert({
-                                    title: 'SUCCESS',
-                                    content: 'The specific person has been deleted.',
-                                    icon: 'fa fa-fw fa-ban',
-                                    animation: 'zoom',
-                                    closeAnimation: 'zoom',
-                                    buttons: {
-                                        okay: {
-                                            text: 'Okay',
-                                            btnClass: 'btn-primary',
-                                            action: function() {
-                                                window.location.reload()
-                                            }
-                                        }
-                                    }
-                                });
-                            else
-                                $.alert({
-                                    title: 'error',
-                                    content: 'Operation failed',
-                                    icon: 'fa fa-fw fa-ban',
-                                    animation: 'zoom',
-                                    closeAnimation: 'zoom',
-                                    buttons: {
-                                        okay: {
-                                            text: 'Okay',
-                                            btnClass: 'btn-primary'
-                                        }
-                                    }
-                                });
-                    })
-                }
-            },
-            cancel: function () {
-            }
-        }
-    });
-});
 
 $(document).ready(function () {
-    //
-    // $("#sign-in").on('click', function () {
-    //     var error = "";
-    //     var email = $("#signInEmail").val();
-    //     var password = $("#signInPass").val();
-    //
-    //     /* An easy email verify */
-    //     if (!checkEmail(email))
-    //         error += "Email address is not valid! <br>";
-    //
-    //     /* An easy password check */
-    //     if (password.length < 8) error += "Password should be more than 8 characters! <br>";
-    //     if (password.match(/([0-9])+/) == null) error += "Password should contain number! <br>";
-    //     if (password.match(/([A-Za-z])+/) == null) error += "Password should contain English letter! <br>";
-    //     if (error != "") {
-    //         console.log(error);
-    //         $.alert({
-    //             title: 'Alert!',
-    //             content: error,
-    //             icon: 'fa fa-fw fa-ban',
-    //             animation: 'zoom',
-    //             closeAnimation: 'zoom',
-    //             buttons: {
-    //                 okay: {
-    //                     text: 'Okay',
-    //                     btnClass: 'btn-primary'
-    //                 }
-    //             }
-    //         });
-    //     }
-    // });
+
+    $.alert({
+        title: '提示信息',
+        content: "助教您好！本通讯录实现了增删改查，使用方法：<br><br>增：点击全部联系人旁边的加号<br>删：点击联系人旁的图标<br>改：点击" +
+        "联系人旁图标，再次点击提交修改(ajax)<br>查：在左边栏的搜索框输入名字",
+        icon: 'fa fa-fw fa-check-square-o',
+        animation: 'zoom',
+        closeAnimation: 'zoom',
+        buttons: {
+            okay: {
+                text: 'Okay',
+                btnClass: 'btn-primary',
+                keys: ['enter']
+                }
+            }
+        });
+
+    $(".delete-button").on("click", function () {
+        this_person = $(this).closest("li");
+        this_name = $(this).closest("div").find(".name").text();
+        $.confirm({
+            title: 'Confirm Deletion',
+            content: "Do you REALLY want to delete?",
+            icon: 'fa fa-question-circle',
+            animation: 'scale',
+            closeAnimation: 'scale',
+            opacity: 0.5,
+            buttons: {
+                'confirm': {
+                    text: 'Yes',
+                    btnClass: 'btn-info',
+                    action: function () {
+                        console.log(name);
+                        $.post("delete/", {name: this_name},
+                            function (data, status) {
+                                if (data.message == 'success')
+                                    $.alert({
+                                        title: 'SUCCESS',
+                                        content: 'The specific person has been deleted.',
+                                        icon: 'fa fa-fw fa-check-square-o',
+                                        animation: 'zoom',
+                                        closeAnimation: 'zoom',
+                                        buttons: {
+                                            okay: {
+                                                text: 'Okay',
+                                                btnClass: 'btn-primary',
+                                                action: function () {
+                                                    this_person.remove();
+                                                },
+                                                keys: ['enter']
+                                            }
+
+                                        }
+                                    });
+                                else
+                                    $.alert({
+                                        title: 'error',
+                                        content: 'Operation failed',
+                                        icon: 'fa fa-fw fa-ban',
+                                        animation: 'zoom',
+                                        closeAnimation: 'zoom',
+                                        buttons: {
+                                            okay: {
+                                                text: 'Okay',
+                                                btnClass: 'btn-primary',
+                                                keys: ['enter']
+                                            }
+                                        }
+                                    });
+                            })
+                    }
+                },
+                cancel: function () {
+                }
+            }
+        });
+    });
 
     $(".edit-button").click(function () {
 
+        this_person = $(this).closest("li");
+        old_name = $(this).closest("div").find(".name").text();
         $(this).closest("div").find(".contact-message").attr("contenteditable", "true");
         var button = $("<i></i>").attr("class", "fa fa-fw fa-check-square-o check-button");
         $(this).after(button);
-        $.alert("You can edit " + $(this).closest("div").find(".name").text() + "'s info now.");
+
+        var content = "You can edit " + $(this).closest("div").find(".name").text() + "'s info now.";
+        $.alert({
+            title: 'Edit',
+            content: content,
+            icon: 'fa fa-fw fa-circle-o',
+            animation: 'zoom',
+            closeAnimation: 'zoom',
+            buttons: {
+                okay: {
+                    text: 'Okay',
+                    btnClass: 'btn-primary',
+                    keys: ['enter']
+                }
+            }
+        });
         $(this).remove();
 
-        $(".check-button").click(function ()
-        {
+        $(".check-button").click(function () {
             newName = $(this).closest("div").find(".name").text();
             newGender = $(this).closest("div").find(".gender").text();
             newTelephone = $(this).closest("div").find(".telephone").text();
@@ -114,14 +120,44 @@ $(document).ready(function () {
             newAddress = $(this).closest("div").find(".location").text();
             newQQ = $(this).closest("div").find(".OICQ").text();
             newEmail = $(this).closest("div").find(".email").text();
-            $.post('')
+            $.post("edit/", {
+                    old_name: old_name, new_name: newName, new_gender: newGender, new_telephone: newTelephone,
+                    new_mobile: newMobile, new_address: newAddress, new_qq: newQQ, new_email: newEmail
+                },
+                function (data, status) {
+                    if (data.message == 'success')
+                        $.alert({
+                            title: 'SUCCESS',
+                            content: "The specific person's info has been updated.",
+                            icon: 'fa fa-fw fa-check-square-o',
+                            animation: 'zoom',
+                            closeAnimation: 'zoom',
+                            buttons: {
+                                okay: {
+                                    text: 'Okay',
+                                    btnClass: 'btn-primary',
+                                    keys: ['enter']
+                                }
+                            }
+                        });
+                    else
+                        $.alert({
+                            title: 'error',
+                            content: 'Operation failed',
+                            icon: 'fa fa-fw fa-ban',
+                            animation: 'zoom',
+                            closeAnimation: 'zoom',
+                            buttons: {
+                                okay: {
+                                    text: 'Okay',
+                                    btnClass: 'btn-primary',
+                                    keys: ['enter']
+                                }
+                            }
+                        });
+                });
 
-            $(this).closest("div").find(".contact-message").attr("contenteditable", "false");
-            var button = $("<i></i>").attr("class", "fa fa-fw fa-edit edit-button");
-            $(this).after(button);
-            // TODO: The submit function
-            alert($(this).closest("div").find(".name").text() + "'s info has been updated.");
-            $(this).remove();
+            window.location.reload();
         });
     });
 
@@ -220,6 +256,6 @@ $(document).ready(function () {
             if (s == "") $(this).closest("div").find(".callout").hide();
         }
         $(this).closest("div").find(".error-tab").text(s);
-    });
+    })
 });
 
